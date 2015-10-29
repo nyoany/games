@@ -1,9 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:id="@+id/movingLayout"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context="l00lgamescommunity.movingsquares.MainActivity">
 
 
@@ -12,36 +14,44 @@
         android:layout_height="50dp"
         android:layout_marginTop="80dp">
         <ImageView
+            android:id="@+id/blue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/square" />
+            android:background="@drawable/blue"
+            android:onClick="disappearBlue"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="160dp">
         <ImageView
+            android:id="@+id/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/square_red"/>
+            android:background="@drawable/black"
+            android:onClick="disappearBlack"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="240dp">
         <ImageView
+            android:id="@+id/yellow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/square_yellow"/>
+            android:background="@drawable/yellow"
+            android:onClick="disappearYellow"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="320dp">
         <ImageView
+            android:id="@+id/green"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/square_green"/>
+            android:background="@drawable/green"
+            android:onClick="disappearGreen"/>
     </LinearLayout>
 
 </RelativeLayout>

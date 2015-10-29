@@ -30,4 +30,5 @@ public class MovingSquareStartActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
