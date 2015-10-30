@@ -12,46 +12,58 @@
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="20dp">
         <ImageView
             android:id="@+id/blue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/blue"
-            android:onClick="disappearBlue"/>
+            android:background="@drawable/blue" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="160dp">
+        android:layout_marginTop="80dp">
         <ImageView
             android:id="@+id/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/black"
-            android:onClick="disappearBlack"/>
+            android:background="@drawable/black" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="240dp">
+        android:layout_marginTop="140dp">
         <ImageView
             android:id="@+id/yellow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/yellow"
-            android:onClick="disappearYellow"/>
+            android:background="@drawable/yellow" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="320dp">
+        android:layout_marginTop="200dp">
         <ImageView
             android:id="@+id/green"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/green"
-            android:onClick="disappearGreen"/>
+            android:background="@drawable/green" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="100dp"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:text="@string/score"/>
+    <TextView
+        android:id="@+id/scoreId"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="260dp"
+        android:textStyle="bold"
+        android:textSize="22dp" />
 </RelativeLayout>

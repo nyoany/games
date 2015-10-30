@@ -1,9 +1,13 @@
 package l00lgamescommunity.movingsquares;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 
 public class MovingSquareStartActivity extends AppCompatActivity {
 
@@ -11,6 +15,7 @@ public class MovingSquareStartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moving_square_start);
+        addListenerOnButton();
     }
 
     @Override
@@ -30,5 +35,24 @@ public class MovingSquareStartActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void addListenerOnButton() {
+
+        Button playButton = (Button) findViewById(R.id.playButton);
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent gameStart = new Intent(MovingSquareStartActivity.this, MainActivity.class);
+                startActivity(gameStart);
+
+            }
+
+        });
+
+    }
+
 
 }

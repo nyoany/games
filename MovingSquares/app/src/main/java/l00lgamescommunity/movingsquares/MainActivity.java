@@ -9,14 +9,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+
+    static int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
+        scoreDisplay.setText("0");
         setListeners();
 
     }
@@ -40,7 +45,6 @@ public class MainActivity extends Activity {
 
     private void setListeners()
     {
-
         final ImageView blueImage = (ImageView) findViewById(R.id.blue);
         blueImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -54,6 +58,8 @@ public class MainActivity extends Activity {
 
                     case MotionEvent.ACTION_UP:
                         blueImage.setVisibility(View.INVISIBLE);
+                        score = score + 20;
+                        updateScore();
                         break;
 
                 }
@@ -74,6 +80,8 @@ public class MainActivity extends Activity {
 
                     case MotionEvent.ACTION_UP:
                         blackImage.setVisibility(View.INVISIBLE);
+                        score = score + 20;
+                        updateScore();
                         break;
 
                 }
@@ -94,6 +102,8 @@ public class MainActivity extends Activity {
 
                     case MotionEvent.ACTION_UP:
                         yellowImage.setVisibility(View.INVISIBLE);
+                        score = score + 20;
+                        updateScore();
                         break;
 
                 }
@@ -111,14 +121,27 @@ public class MainActivity extends Activity {
 
                     case MotionEvent.ACTION_DOWN:
 
-
                     case MotionEvent.ACTION_UP:
                         greenImage.setVisibility(View.INVISIBLE);
+                        score = score + 20;
+                        updateScore();
                         break;
 
                 }
                 return true;
             }
         });
+    }
+
+    private static int getScore()
+    {
+        return score;
+    }
+
+    private void updateScore()
+    {
+        TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
+        scoreDisplay.setText(Integer.toString(getScore()));
+
     }
 }

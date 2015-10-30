@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">Moving Squares</string>
+    <string name="app_name">M o V i N g ~ B a L o O n S</string>
 
-    <string name="squareTitle">Moving Squares</string>
-    <string name="title_activity_main">MainActivity</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="squareTitle">M o V i N g ~ B a L o O n S</string>
     <string name="action_settings">Settings</string>
+    <string name="welcome">M o V i N g ~ B a L o O n S </string>
+    <string name="levelSelection">Select Level : </string>
+    <string name="easy">Take me easy</string>
+    <string name="medium">Needs improvement</string>
+    <string name="expert">Expert</string>
+    <string name="score">Score :</string>
+
 </resources>
