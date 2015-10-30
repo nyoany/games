@@ -15,15 +15,14 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     static int score = 0;
+    static boolean running = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
-        scoreDisplay.setText("0");
         setListeners();
-
+        startGame();
     }
 
     @Override
@@ -142,6 +141,26 @@ public class MainActivity extends Activity {
     {
         TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
         scoreDisplay.setText(Integer.toString(getScore()));
+
+    }
+/**
+    private boolean isRunning()
+    {
+
+    
+    }
+ */
+
+    private void startGame()
+    {
+        TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
+        scoreDisplay.setText("0");
+
+        while (running)
+        {
+
+
+        }
 
     }
 }

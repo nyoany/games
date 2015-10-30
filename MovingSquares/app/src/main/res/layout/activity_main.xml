@@ -54,7 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="330dp"
-        android:layout_marginLeft="100dp"
         android:textStyle="bold"
         android:textSize="22dp"
         android:text="@string/score"/>
@@ -63,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="330dp"
-        android:layout_marginLeft="260dp"
+        android:layout_marginLeft="75dp"
         android:textStyle="bold"
         android:textSize="22dp" />
 </RelativeLayout>
