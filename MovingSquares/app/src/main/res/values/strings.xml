@@ -9,5 +9,6 @@
     <string name="medium">Needs improvement</string>
     <string name="expert">Expert</string>
     <string name="score">Score :</string>
+    <string name="time">Remaining time :</string>
 
 </resources>

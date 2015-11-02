@@ -65,4 +65,20 @@
         android:layout_marginLeft="75dp"
         android:textStyle="bold"
         android:textSize="22dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="370dp"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:text="@string/time"/>
+    <TextView
+        android:id="@+id/timerId"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="75dp"
+        android:textStyle="bold"
+        android:textSize="22dp" />
 </RelativeLayout>

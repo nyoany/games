@@ -1,6 +1,7 @@
 package l00lgamescommunity.movingsquares;
 
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -54,9 +55,10 @@ public class MainActivity extends Activity {
 
                     case MotionEvent.ACTION_DOWN:
 
-
                     case MotionEvent.ACTION_UP:
                         blueImage.setVisibility(View.INVISIBLE);
+                        blueImage.setX(0);
+                        blueImage.setVisibility(View.VISIBLE);
                         score = score + 20;
                         updateScore();
                         break;
@@ -97,7 +99,6 @@ public class MainActivity extends Activity {
                 switch (eventAction) {
 
                     case MotionEvent.ACTION_DOWN:
-
 
                     case MotionEvent.ACTION_UP:
                         yellowImage.setVisibility(View.INVISIBLE);
@@ -155,12 +156,25 @@ public class MainActivity extends Activity {
     {
         TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
         scoreDisplay.setText("0");
+        running = true;
+        new CountDownTimer(15000, 1000) {
 
-        while (running)
-        {
+            public void onTick(long millisUntilFinished) {
+                ((TextView)findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 1000));
+            }
 
+            public void onFinish() {
+                ((TextView)findViewById(R.id.timerId)).setText("0");
+                running = false;
+            }
+        }.start();
 
-        }
+        int x = 20;
+
+            final ImageView blueImage = (ImageView) findViewById(R.id.blue);
+            blueImage.setX(x);
+            x = x+20;
+
 
     }
 }

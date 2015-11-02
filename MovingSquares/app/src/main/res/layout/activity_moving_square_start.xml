@@ -24,7 +24,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:text="@string/welcome"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="1dp"
         android:textStyle="bold"
         android:textColor="#000"
         android:textSize="23dp"/>
@@ -51,7 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/easy"
-        android:checked="true"
         android:textStyle="bold"
         android:textColor="#ff4040"
         android:textSize="18dp"/>

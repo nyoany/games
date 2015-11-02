@@ -8,6 +8,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovingSquareStartActivity extends AppCompatActivity {
 
@@ -16,6 +20,7 @@ public class MovingSquareStartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moving_square_start);
         addListenerOnButton();
+        addListenerOnCheckboxes();
     }
 
     @Override
@@ -47,12 +52,53 @@ public class MovingSquareStartActivity extends AppCompatActivity {
 
                 Intent gameStart = new Intent(MovingSquareStartActivity.this, MainActivity.class);
                 startActivity(gameStart);
-
             }
-
         });
-
     }
 
+    public void addListenerOnCheckboxes()
+    {
+        CheckBox easyCheck = (CheckBox) findViewById(R.id.easyCheck);
+        CheckBox mediumCheck = (CheckBox) findViewById(R.id.mediumCheck);
+        CheckBox hardCheck = (CheckBox) findViewById(R.id.expertCheck);
+
+        easyCheck.setChecked(true);
+        easyCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                unCheckOthers(R.id.easyCheck);
+            }
+        });
+
+        mediumCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                unCheckOthers(R.id.mediumCheck);
+            }
+        });
+
+        hardCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                unCheckOthers(R.id.expertCheck);
+            }
+        });
+    }
+
+    private void unCheckOthers(int selectedID)
+    {
+        List<CheckBox> checkboxes = new ArrayList<>();
+        checkboxes.add((CheckBox) findViewById(R.id.easyCheck));
+        checkboxes.add((CheckBox) findViewById(R.id.mediumCheck));
+        checkboxes.add((CheckBox) findViewById(R.id.expertCheck));
+
+        for(CheckBox check : checkboxes)
+        {
+            if(check.isSelected() && check.getId()!= selectedID)
+            {
+                check.setChecked(false);
+            }
+        }
+    }
 
 }
