@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,23 +64,23 @@ public class MovingSquareStartActivity extends AppCompatActivity {
         CheckBox hardCheck = (CheckBox) findViewById(R.id.expertCheck);
 
         easyCheck.setChecked(true);
-        easyCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                unCheckOthers(R.id.easyCheck);
-            }
-        });
+        easyCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        mediumCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
+        public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
+            unCheckOthers(R.id.easyCheck);
+        }
+    });
+
+        mediumCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
                 unCheckOthers(R.id.mediumCheck);
             }
         });
 
-        hardCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
+        hardCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
                 unCheckOthers(R.id.expertCheck);
             }
         });

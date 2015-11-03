@@ -1,6 +1,7 @@
 package l00lgamescommunity.movingsquares;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,10 @@ public class MainActivity extends Activity {
 
     static int score = 0;
     static boolean running = false;
+    static float bluePos = 0;
+    static int blackPos = 0;
+    static int yellowPos = 0;
+    static int greenPos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +61,15 @@ public class MainActivity extends Activity {
                     case MotionEvent.ACTION_DOWN:
 
                     case MotionEvent.ACTION_UP:
-                        blueImage.setVisibility(View.INVISIBLE);
-                        blueImage.setX(0);
-                        blueImage.setVisibility(View.VISIBLE);
-                        score = score + 20;
-                        updateScore();
-                        break;
-
+                        if(running) {
+                            blueImage.setVisibility(View.INVISIBLE);
+                            bluePos = 0;
+                            blueImage.setX(bluePos);
+                            blueImage.setVisibility(View.VISIBLE);
+                            score = score + 20;
+                            updateScore();
+                            break;
+                        }
                 }
                 return true;
             }
@@ -78,13 +85,14 @@ public class MainActivity extends Activity {
 
                     case MotionEvent.ACTION_DOWN:
 
-
                     case MotionEvent.ACTION_UP:
-                        blackImage.setVisibility(View.INVISIBLE);
-                        score = score + 20;
-                        updateScore();
-                        break;
+                        if(running) {
 
+                                blackImage.setVisibility(View.INVISIBLE);
+                                score = score + 20;
+                                updateScore();
+                                break;
+                        }
                 }
                 return true;
             }
@@ -101,11 +109,12 @@ public class MainActivity extends Activity {
                     case MotionEvent.ACTION_DOWN:
 
                     case MotionEvent.ACTION_UP:
-                        yellowImage.setVisibility(View.INVISIBLE);
-                        score = score + 20;
-                        updateScore();
-                        break;
-
+                        if(running) {
+                            yellowImage.setVisibility(View.INVISIBLE);
+                            score = score + 20;
+                            updateScore();
+                            break;
+                        }
                 }
                 return true;
             }
@@ -122,11 +131,12 @@ public class MainActivity extends Activity {
                     case MotionEvent.ACTION_DOWN:
 
                     case MotionEvent.ACTION_UP:
-                        greenImage.setVisibility(View.INVISIBLE);
-                        score = score + 20;
-                        updateScore();
-                        break;
-
+                        if(running) {
+                            greenImage.setVisibility(View.INVISIBLE);
+                            score = score + 20;
+                            updateScore();
+                            break;
+                        }
                 }
                 return true;
             }
@@ -144,37 +154,38 @@ public class MainActivity extends Activity {
         scoreDisplay.setText(Integer.toString(getScore()));
 
     }
-/**
-    private boolean isRunning()
-    {
-
-    
-    }
- */
 
     private void startGame()
     {
         TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
         scoreDisplay.setText("0");
         running = true;
+        score = 0;
+
         new CountDownTimer(15000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 ((TextView)findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 1000));
-            }
+                    moveImages();
+                }
 
             public void onFinish() {
                 ((TextView)findViewById(R.id.timerId)).setText("0");
                 running = false;
+                Context context = getApplicationContext();
+                CharSequence text = "Game over! \n You scored : " + score + ".";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         }.start();
+    }
 
-        int x = 20;
-
-            final ImageView blueImage = (ImageView) findViewById(R.id.blue);
-            blueImage.setX(x);
-            x = x+20;
-
-
+    private void moveImages()
+    {
+        ImageView blueImage = (ImageView) findViewById(R.id.blue);
+        bluePos = blueImage.getX() + 10;
+        blueImage.setX(bluePos);
     }
 }
