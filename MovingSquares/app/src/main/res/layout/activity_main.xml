@@ -20,40 +20,63 @@
             android:background="@drawable/blue" />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="50dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="80dp">
         <ImageView
             android:id="@+id/black"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="@drawable/black" />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="50dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="140dp">
         <ImageView
             android:id="@+id/yellow"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="@drawable/yellow" />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="50dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="200dp">
         <ImageView
             android:id="@+id/green"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="@drawable/green" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="260dp">
+        <ImageView
+            android:id="@+id/red"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/red" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="320dp">
+        <ImageView
+            android:id="@+id/purple"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/purple2"
+            />
+    </LinearLayout>
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="390dp"
         android:textStyle="bold"
         android:textSize="22dp"
         android:text="@string/score"/>
@@ -61,7 +84,7 @@
         android:id="@+id/scoreId"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="390dp"
         android:layout_marginLeft="75dp"
         android:textStyle="bold"
         android:textSize="22dp" />
@@ -69,7 +92,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="420dp"
         android:textStyle="bold"
         android:textSize="22dp"
         android:text="@string/time"/>
@@ -77,7 +100,7 @@
         android:id="@+id/timerId"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="420dp"
         android:layout_marginLeft="195dp"
         android:textStyle="bold"
         android:textSize="22dp" />

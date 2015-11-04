@@ -14,14 +14,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends Activity {
 
     static int score = 0;
     static boolean running = false;
     static float bluePos = 0;
-    static int blackPos = 0;
-    static int yellowPos = 0;
-    static int greenPos = 0;
+    static float blackPos = 0;
+    static float yellowPos = 0;
+    static float greenPos = 0;
+    static float redPos = 0;
+    static float purplePos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,9 @@ public class MainActivity extends Activity {
                         if(running) {
                             blueImage.setVisibility(View.INVISIBLE);
                             bluePos = 0;
+                            Random rand = new Random();
+                            int n = rand.nextInt(200) + 20;
+                            bluePos = bluePos + n;
                             blueImage.setX(bluePos);
                             blueImage.setVisibility(View.VISIBLE);
                             score = score + 20;
@@ -87,9 +94,14 @@ public class MainActivity extends Activity {
 
                     case MotionEvent.ACTION_UP:
                         if(running) {
-
                                 blackImage.setVisibility(View.INVISIBLE);
-                                score = score + 20;
+                                blackPos = 0;
+                                Random rand = new Random();
+                                int n = rand.nextInt(200) + 20;
+                                blackPos = blackPos + n;
+                                blackImage.setX(blackPos);
+                                blackImage.setVisibility(View.VISIBLE);
+                                score = score + 40;
                                 updateScore();
                                 break;
                         }
@@ -111,7 +123,13 @@ public class MainActivity extends Activity {
                     case MotionEvent.ACTION_UP:
                         if(running) {
                             yellowImage.setVisibility(View.INVISIBLE);
-                            score = score + 20;
+                            yellowPos = 0;
+                            Random rand = new Random();
+                            int n = rand.nextInt(200) + 20;
+                            yellowPos = yellowPos + n;
+                            yellowImage.setX(yellowPos);
+                            yellowImage.setVisibility(View.VISIBLE);
+                            score = score + 80;
                             updateScore();
                             break;
                         }
@@ -133,7 +151,69 @@ public class MainActivity extends Activity {
                     case MotionEvent.ACTION_UP:
                         if(running) {
                             greenImage.setVisibility(View.INVISIBLE);
-                            score = score + 20;
+                            greenPos = 0;
+                            Random rand = new Random();
+                            int n = rand.nextInt(200) + 20;
+                            greenPos = greenPos + n;
+                            greenImage.setX(greenPos);
+                            greenImage.setVisibility(View.VISIBLE);
+                            score = score + 120;
+                            updateScore();
+                            break;
+                        }
+                }
+                return true;
+            }
+        });
+
+        final ImageView redImage = (ImageView) findViewById(R.id.red);
+        redImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int eventAction = event.getAction();
+
+                switch (eventAction) {
+
+                    case MotionEvent.ACTION_DOWN:
+
+                    case MotionEvent.ACTION_UP:
+                        if(running) {
+                            redImage.setVisibility(View.INVISIBLE);
+                            redPos = 0;
+                            Random rand = new Random();
+                            int n = rand.nextInt(200) + 20;
+                            redPos = redPos + n;
+                            redImage.setX(redPos);
+                            redImage.setVisibility(View.VISIBLE);
+                            score = score + 160;
+                            updateScore();
+                            break;
+                        }
+                }
+                return true;
+            }
+        });
+
+        final ImageView purpleImage = (ImageView) findViewById(R.id.purple);
+        purpleImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int eventAction = event.getAction();
+
+                switch (eventAction) {
+
+                    case MotionEvent.ACTION_DOWN:
+
+                    case MotionEvent.ACTION_UP:
+                        if(running) {
+                            purpleImage.setVisibility(View.INVISIBLE);
+                            purplePos = 0;
+                            Random rand = new Random();
+                            int n = rand.nextInt(200) + 20;
+                            purplePos = purplePos + n;
+                            purpleImage.setX(purplePos);
+                            purpleImage.setVisibility(View.VISIBLE);
+                            score = score + 220;
                             updateScore();
                             break;
                         }
@@ -185,7 +265,81 @@ public class MainActivity extends Activity {
     private void moveImages()
     {
         ImageView blueImage = (ImageView) findViewById(R.id.blue);
-        bluePos = blueImage.getX() + 10;
+
+        if(blueImage.getX() >= 350)
+        {
+            bluePos = 30;
+
+        }
+        else
+        {
+            bluePos = blueImage.getX() + 30;
+        }
         blueImage.setX(bluePos);
+
+        ImageView blackImage = (ImageView) findViewById(R.id.black);
+
+        if(blackImage.getX() >= 350)
+        {
+            blackPos = 40;
+
+        }
+        else
+        {
+            blackPos = blackImage.getX() + 40;
+        }
+        blackImage.setX(blackPos);
+
+        ImageView yellowImage = (ImageView) findViewById(R.id.yellow);
+
+        if(yellowImage.getX() >= 350)
+        {
+            yellowPos = 50;
+
+        }
+        else
+        {
+            yellowPos = yellowImage.getX() + 50;
+        }
+        yellowImage.setX(yellowPos);
+
+
+        ImageView greenImage = (ImageView) findViewById(R.id.green);
+
+        if(greenImage.getX() >= 350)
+        {
+            greenPos = 60;
+
+        }
+        else
+        {
+            greenPos = greenImage.getX() + 60;
+        }
+        greenImage.setX(greenPos);
+
+        ImageView redImage = (ImageView) findViewById(R.id.red);
+
+        if(redImage.getX() >= 350)
+        {
+            redPos = 70;
+
+        }
+        else
+        {
+            redPos = redImage.getX() + 70;
+        }
+        redImage.setX(redPos);
+
+        ImageView purpleImage = (ImageView) findViewById(R.id.purple);
+        if(purpleImage.getX() >= 350)
+        {
+            purplePos = 80;
+
+        }
+        else
+        {
+            purplePos = purpleImage.getX() + 80;
+        }
+        purpleImage.setX(purplePos);
     }
 }
