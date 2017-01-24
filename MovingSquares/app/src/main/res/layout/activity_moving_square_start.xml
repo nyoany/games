@@ -33,7 +33,7 @@
     <LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="200dp"
-    android:layout_marginTop="40dp"
+    android:layout_marginTop="20dp"
     android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
@@ -44,50 +44,64 @@
             android:textStyle="bold"
             android:textColor="#000"
             android:textSize="22dp"
-            android:layout_marginBottom="20dp"
-        />
-    <CheckBox
-        android:id="@+id/easyCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/easy"
-        android:textStyle="bold"
-        android:textColor="#ff4040"
-        android:textSize="18dp"/>
+            android:layout_marginBottom="10dp"/>
 
-    <CheckBox
-        android:id="@+id/mediumCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/medium"
-        android:textStyle="bold"
-        android:textColor="#7ac5cd"
-        android:textSize="18dp"
-        />
-
-    <CheckBox
-        android:id="@+id/expertCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/expert"
-        android:textStyle="bold"
-        android:textColor="#006400"
-        android:textSize="18dp"/>
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioButton android:id="@+id/easyCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/easy"
+                android:textStyle="bold"
+                android:textColor="#ff4040"
+                android:textSize="18dp"
+                android:checked="true"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/mediumCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medium"
+                android:textStyle="bold"
+                android:textColor="#7ac5cd"
+                android:textSize="18dp"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/expertCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expert"
+                android:textStyle="bold"
+                android:textColor="#006400"
+                android:textSize="18dp"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
 </LinearLayout>
 <LinearLayout
     android:layout_width="190dp"
     android:layout_height="60dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="-20dp">
     <Button
         android:id="@+id/playButton"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginLeft="50dp"
-        android:text="PLAY"
+        android:text="start"
         android:textStyle="bold"
         android:textColor="#458b00"
         android:textSize="22dp" />
 </LinearLayout>
+       <Button
+           android:id="@+id/aboutButton"
+           android:layout_width="180dp"
+           android:layout_height="40dp"
+           android:layout_marginTop="40dp"
+           android:layout_marginLeft="40dp"
+           android:text="How to play"
+           android:textColor="#ff4040"
+           android:textStyle="bold"
+           android:textSize="15dp" />
 </LinearLayout>
 
 </RelativeLayout>

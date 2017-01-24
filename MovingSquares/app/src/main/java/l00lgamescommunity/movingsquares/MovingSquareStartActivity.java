@@ -1,27 +1,29 @@
 package l00lgamescommunity.movingsquares;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovingSquareStartActivity extends AppCompatActivity {
+    public static int level = 1;
+    MediaPlayer startSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moving_square_start);
         addListenerOnButton();
-        addListenerOnCheckboxes();
     }
 
     @Override
@@ -52,54 +54,45 @@ public class MovingSquareStartActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Intent gameStart = new Intent(MovingSquareStartActivity.this, MainActivity.class);
+                MainActivity.level = level;
                 startActivity(gameStart);
             }
         });
-    }
 
-    public void addListenerOnCheckboxes()
-    {
-        CheckBox easyCheck = (CheckBox) findViewById(R.id.easyCheck);
-        CheckBox mediumCheck = (CheckBox) findViewById(R.id.mediumCheck);
-        CheckBox hardCheck = (CheckBox) findViewById(R.id.expertCheck);
+        Button aboutButton = (Button) findViewById(R.id.aboutButton);
 
-        easyCheck.setChecked(true);
-        easyCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        playButton.setOnClickListener(new View.OnClickListener() {
 
-        public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
-            unCheckOthers(R.id.easyCheck);
-        }
-    });
+            @Override
+            public void onClick(View arg0) {
 
-        mediumCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
-                unCheckOthers(R.id.mediumCheck);
-            }
-        });
-
-        hardCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
-                unCheckOthers(R.id.expertCheck);
+                Intent about = new Intent(MovingSquareStartActivity.this, MainActivity.class);
+                startActivity(about);
             }
         });
     }
 
-    private void unCheckOthers(int selectedID)
-    {
-        List<CheckBox> checkboxes = new ArrayList<>();
-        checkboxes.add((CheckBox) findViewById(R.id.easyCheck));
-        checkboxes.add((CheckBox) findViewById(R.id.mediumCheck));
-        checkboxes.add((CheckBox) findViewById(R.id.expertCheck));
+        public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
 
-        for(CheckBox check : checkboxes)
-        {
-            if(check.isSelected() && check.getId()!= selectedID)
-            {
-                check.setChecked(false);
-            }
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.easyCheck:
+                if (!checked)
+                    level = 1;
+                    // Pirates are the best
+                    break;
+            case R.id.mediumCheck:
+                if (!checked)
+                    // Ninjas rule
+                level = 2;
+                    break;
+            case R.id.expertCheck:
+                if (!checked)
+                    level = 3;
+                    // Ninjas rule
+                    break;
         }
     }
-
 }
