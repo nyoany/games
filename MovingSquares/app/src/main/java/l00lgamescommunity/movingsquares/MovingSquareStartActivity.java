@@ -8,12 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MovingSquareStartActivity extends AppCompatActivity {
     public static int level = 1;
@@ -23,7 +18,7 @@ public class MovingSquareStartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moving_square_start);
-        addListenerOnButton();
+        addListenersOnButtons();
     }
 
     @Override
@@ -44,7 +39,7 @@ public class MovingSquareStartActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addListenerOnButton() {
+    public void addListenersOnButtons() {
 
         Button playButton = (Button) findViewById(R.id.playButton);
 
@@ -61,15 +56,16 @@ public class MovingSquareStartActivity extends AppCompatActivity {
 
         Button aboutButton = (Button) findViewById(R.id.aboutButton);
 
-        playButton.setOnClickListener(new View.OnClickListener() {
+        aboutButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                Intent about = new Intent(MovingSquareStartActivity.this, MainActivity.class);
+                Intent about = new Intent(MovingSquareStartActivity.this, AboutActivity.class);
                 startActivity(about);
             }
         });
+
     }
 
         public void onRadioButtonClicked(View view) {
@@ -79,20 +75,22 @@ public class MovingSquareStartActivity extends AppCompatActivity {
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.easyCheck:
-                if (!checked)
+                if (checked)
+                {
                     level = 1;
-                    // Pirates are the best
                     break;
+                }
             case R.id.mediumCheck:
-                if (!checked)
-                    // Ninjas rule
-                level = 2;
+                if (checked)
+                {
+                    level = 2;
                     break;
+                }
             case R.id.expertCheck:
-                if (!checked)
+                if(checked)
+                {
                     level = 3;
-                    // Ninjas rule
-                    break;
+                }
         }
     }
 }

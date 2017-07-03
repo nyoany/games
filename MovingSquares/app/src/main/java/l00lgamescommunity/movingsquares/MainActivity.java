@@ -2,6 +2,7 @@ package l00lgamescommunity.movingsquares;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,55 +19,56 @@ import java.util.Random;
 
 public class MainActivity extends Activity
 {
-    static int score = 0;
+    int score = 0;
     static boolean running = false;
-    static float blueYPos = 0;
-    static float blackYPos = 0;
-    static float yellowYPos = 0;
-    static float greenYPos = 0;
-    static float redYPos = 0;
-    static float purpleYPos = 0;
+    float blueYPos = 0;
+    float blackYPos = 0;
+    float yellowYPos = 0;
+    float greenYPos = 0;
+    float redYPos = 0;
+    float purpleYPos = 0;
 
-    static float blueXPos = 0;
-    static float blackXPos = 0;
-    static float yellowXPos = 0;
-    static float greenXPos = 0;
-    static float redXPos = 0;
-    static float purpleXPos = 0;
+    float blueXPos = 0;
+    float blackXPos = 0;
+    float yellowXPos = 0;
+    float greenXPos = 0;
+    float redXPos = 0;
+    float purpleXPos = 0;
 
-    static float blueInitialX = 0;
-    static float blackInitialX = 0;
-    static float greenInitialX = 0;
-    static float yellowInitialX = 0;
-    static float redInitialX = 0;
-    static float purpleInitialX = 0;
+    float blueInitialX = 0;
+    float blackInitialX = 0;
+    float greenInitialX = 0;
+    float yellowInitialX = 0;
+    float redInitialX = 0;
+    float purpleInitialX = 0;
 
-    static boolean blueDead = false;
-    static boolean blackDead = false;
-    static boolean greenDead = false;
-    static boolean yellowDead = false;
-    static boolean redDead = false;
-    static boolean purpleDead = false;
-    static final int maxY = 410;
+    boolean blueDead = false;
+    boolean blackDead = false;
+    boolean greenDead = false;
+    boolean yellowDead = false;
+    boolean redDead = false;
+    boolean purpleDead = false;
+    final int maxY = 600;
 
     static int level = 1;
 
-    static int speed = 30;
+    int speed = 50;
 
     MediaPlayer mp;
-    MediaPlayer startSound;
+    //MediaPlayer startSound;
     MediaPlayer dieSound;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setListeners();
-        playStartSound();
-        startGame();
         mp = MediaPlayer.create(this, R.raw.blop);
-        startSound = MediaPlayer.create(this, R.raw.caramba);
+        //startSound = MediaPlayer.create(this, R.raw.caramba);
         dieSound = MediaPlayer.create(this, R.raw.woosh);
+        //playStartSound();
+        startGame();
     }
 
     @Override
@@ -100,6 +103,22 @@ public class MainActivity extends Activity
 
     private void setListeners()
     {
+        Button backButton = (Button) findViewById(R.id.backButton);
+        backButton.setEnabled(false);
+        backButton.setClickable(false);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                if(!running)
+                {
+                    Intent back = new Intent(MainActivity.this, MovingSquareStartActivity.class);
+                    startActivity(back);
+                }
+            }
+        });
+
         final ImageView blueImage = (ImageView) findViewById(R.id.blue);
         blueImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -263,7 +282,7 @@ public class MainActivity extends Activity
         });
     }
 
-    private static int getScore()
+    private int getScore()
     {
         return score;
     }
@@ -304,7 +323,6 @@ public class MainActivity extends Activity
         yellowDead = false;
         redDead = false;
         purpleDead = false;
-
     }
 
     private void startGame()
@@ -315,45 +333,34 @@ public class MainActivity extends Activity
         score = 0;
         initialize();
 
-
         new CountDownTimer(25000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 ((TextView)findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 1000));
+
+                if (blueDead && blackDead && greenDead && yellowDead && redDead && purpleDead)
+                {
+                    onFinish();
+                    cancel();
+                    return;
+                }
+
                 moveImages();
             }
 
-            public void onFinish() {
+            public void onFinish()
+            {
                 ((TextView)findViewById(R.id.timerId)).setText("0");
+
                 running = false;
-              /*  blueYPos = 20;
-                blueXPos = blueInitialX;
-                (findViewById(R.id.blue)).setY(20);
-                (findViewById(R.id.blue)).setX(blueXPos);
-                blackYPos = 20;
-                blackXPos = blackInitialX;
-                (findViewById(R.id.black)).setY(20);
-                (findViewById(R.id.black)).setX(blackXPos);
-                yellowYPos = 20;
-                yellowXPos = yellowInitialX;
-                (findViewById(R.id.yellow)).setY(20);
-                (findViewById(R.id.yellow)).setX(yellowXPos);
-                redYPos = 20;
-                redXPos = redInitialX;
-                (findViewById(R.id.red)).setY(20);
-                (findViewById(R.id.red)).setX(redInitialX);
-                greenYPos = 20;
-                greenXPos = greenInitialX;
-                (findViewById(R.id.green)).setY(20);
-                (findViewById(R.id.green)).setX(greenXPos);
-                purpleYPos = 20;
-                purpleXPos = purpleInitialX;
-                (findViewById(R.id.purple)).setY(20);
-                (findViewById(R.id.purple)).setX(purpleInitialX);
-*/
+
+                Button backButton = (Button) findViewById(R.id.backButton);
+                backButton.setEnabled(true);
+                backButton.setClickable(true);
+
                 Context context = getApplicationContext();
-                CharSequence text = "Game over! \n You scored : " + score + ".";
-                int duration = Toast.LENGTH_LONG;
+                CharSequence text = "Well done! \n You scored : " + score + ".";
+                int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -365,11 +372,11 @@ public class MainActivity extends Activity
     {
         if(level == 2)
         {
-            speed = 50;
+            speed = 70;
         }
         else if(level == 3)
         {
-            speed = 80;
+            speed = 90;
         }
 
         ImageView blueImage = (ImageView) findViewById(R.id.blue);

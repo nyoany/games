@@ -21,6 +21,10 @@
             android:name=".MainActivity"
             android:label="@string/squareTitle" >
         </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/squareTitle" >
+        </activity>
     </application>
 
 </manifest>

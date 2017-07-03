@@ -6,10 +6,14 @@
     <string name="welcome">D i Z Z y ~ C O W S</string>
     <string name="levelSelection">Select Level : </string>
     <string name="easy">Take me easy</string>
-    <string name="medium">Needs improvement</string>
+    <string name="medium">I might handle it</string>
     <string name="expert">Expert</string>
     <string name="score">Score :</string>
     <string name="time">Remaining time :</string>
+    <string name="start">Start</string>
+    <string name="back">Back</string>
+    <string name="aboutShort">About the game</string>
+    <string name="about">Save as many cows as you can.\n\nEach time you keep a cow away from the fence you are getting points.\n\nGood luck! </string>
 
     <string name="title_activity_how_to_play">How To Play</string>
     <string name="dummy_button">Dummy Button</string>
