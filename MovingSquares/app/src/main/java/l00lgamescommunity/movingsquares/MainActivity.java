@@ -1,11 +1,15 @@
 package l00lgamescommunity.movingsquares;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -15,39 +19,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
-
-public class MainActivity extends Activity
-{
+public class MainActivity extends Activity {
     int score = 0;
     static boolean running = false;
-    float blueYPos = 0;
-    float blackYPos = 0;
-    float yellowYPos = 0;
-    float greenYPos = 0;
-    float redYPos = 0;
-    float purpleYPos = 0;
 
-    float blueXPos = 0;
-    float blackXPos = 0;
-    float yellowXPos = 0;
-    float greenXPos = 0;
-    float redXPos = 0;
-    float purpleXPos = 0;
+    /**
+     * A list of the cows in the game.
+     */
+    private List<Cow> cows = Arrays.asList(new Cow(R.id.blue, R.drawable.my_cow_dead_green, 30),
+            new Cow(R.id.black, R.drawable.my_cow2_dead_green, 40),
+            new Cow(R.id.yellow, R.drawable.my_cow3_dead_green, 50),
+            new Cow(R.id.green, R.drawable.my_cow4_dead_green, 60),
+            new Cow(R.id.red, R.drawable.my_cow5_dead_green, 70),
+            new Cow(R.id.purple, R.drawable.my_cow6_dead_green, 80));
 
-    float blueInitialX = 0;
-    float blackInitialX = 0;
-    float greenInitialX = 0;
-    float yellowInitialX = 0;
-    float redInitialX = 0;
-    float purpleInitialX = 0;
-
-    boolean blueDead = false;
-    boolean blackDead = false;
-    boolean greenDead = false;
-    boolean yellowDead = false;
-    boolean redDead = false;
-    boolean purpleDead = false;
     final int maxY = 600;
 
     static int level = 1;
@@ -55,19 +40,18 @@ public class MainActivity extends Activity
     int speed = 50;
 
     MediaPlayer mp;
-    //MediaPlayer startSound;
+    // MediaPlayer startSound;
     MediaPlayer dieSound;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setListeners();
         mp = MediaPlayer.create(this, R.raw.blop);
-        //startSound = MediaPlayer.create(this, R.raw.caramba);
+        // startSound = MediaPlayer.create(this, R.raw.caramba);
         dieSound = MediaPlayer.create(this, R.raw.woosh);
-        //playStartSound();
+        // playStartSound();
         startGame();
     }
 
@@ -88,21 +72,19 @@ public class MainActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
-    private void playStartSound()
-    {
+    private void playStartSound() {
         mp.start();
     }
-    private void playSound()
-    {
+
+    private void playSound() {
         mp.start();
     }
-    private void playDieSound()
-    {
+
+    private void playDieSound() {
         dieSound.start();
     }
 
-    private void setListeners()
-    {
+    private void setListeners() {
         Button backButton = (Button) findViewById(R.id.backButton);
         backButton.setEnabled(false);
         backButton.setClickable(false);
@@ -111,16 +93,26 @@ public class MainActivity extends Activity
 
             @Override
             public void onClick(View arg0) {
-                if(!running)
-                {
+                if (!running) {
                     Intent back = new Intent(MainActivity.this, MovingSquareStartActivity.class);
                     startActivity(back);
                 }
             }
         });
 
-        final ImageView blueImage = (ImageView) findViewById(R.id.blue);
-        blueImage.setOnTouchListener(new View.OnTouchListener() {
+        for (Cow cow : cows) {
+            setupCow(cow);
+        }
+    }
+
+    /**
+     * Initialise a cow with a click listener.
+     *
+     * @param cow The cow to set up.
+     */
+    private void setupCow(final Cow cow) {
+        final ImageView image = (ImageView) findViewById(cow.getImageId());
+        image.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int eventAction = event.getAction();
@@ -128,151 +120,16 @@ public class MainActivity extends Activity
                 switch (eventAction) {
 
                     case MotionEvent.ACTION_DOWN:
-                        if(running && !blueDead) {
+                        if (running && !cow.isDead()) {
                             playSound();
-                            blueImage.setVisibility(View.INVISIBLE);
-                            blueYPos = 0;
+                            image.setVisibility(View.INVISIBLE);
+                            cow.setYPos(0);
                             Random rand = new Random();
                             int n = 20;
-                            blueYPos = blueYPos + n;
-                            blueImage.setY(blueYPos);
-                            blueImage.setVisibility(View.VISIBLE);
-                            score = score + 30;
-                            updateScore();
-                            break;
-                        }
-                }
-                return true;
-            }
-        });
-
-        final ImageView blackImage = (ImageView) findViewById(R.id.black);
-        blackImage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventAction = event.getAction();
-
-                switch (eventAction) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        if(running && !blackDead) {
-                            playSound();
-                            blackImage.setVisibility(View.INVISIBLE);
-                            blackYPos = 0;
-                            Random rand = new Random();
-                            int n = 20;
-                            blackYPos = blackYPos + n;
-                            blackImage.setY(blackYPos);
-                            blackImage.setVisibility(View.VISIBLE);
-                            score = score + 40;
-                            updateScore();
-                            break;
-                        }
-                }
-                return true;
-            }
-        });
-
-        final ImageView yellowImage = (ImageView) findViewById(R.id.yellow);
-        yellowImage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventAction = event.getAction();
-
-                switch (eventAction) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        if(running && !yellowDead) {
-                            playSound();
-                            yellowImage.setVisibility(View.INVISIBLE);
-                            yellowYPos = 0;
-                            Random rand = new Random();
-                            int n = 20;
-                            yellowYPos = yellowYPos + n;
-                            yellowImage.setY(yellowYPos);
-                            yellowImage.setVisibility(View.VISIBLE);
-                            score = score + 50;
-                            updateScore();
-                            break;
-                        }
-                }
-                return true;
-            }
-        });
-
-        final ImageView greenImage = (ImageView) findViewById(R.id.green);
-        greenImage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventAction = event.getAction();
-
-                switch (eventAction) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        if(running && !greenDead) {
-                            playSound();
-                            greenImage.setVisibility(View.INVISIBLE);
-                            greenYPos = 0;
-                            Random rand = new Random();
-                            int n = 20;
-                            greenYPos = greenYPos + n;
-                            greenImage.setY(greenYPos);
-                            greenImage.setVisibility(View.VISIBLE);
-                            score = score + 60;
-                            updateScore();
-                            break;
-                        }
-                }
-                return true;
-            }
-        });
-
-        final ImageView redImage = (ImageView) findViewById(R.id.red);
-        redImage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventAction = event.getAction();
-
-                switch (eventAction) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        if(running && !redDead) {
-                            playSound();
-                            redImage.setVisibility(View.INVISIBLE);
-                            redYPos = 0;
-                            Random rand = new Random();
-                            int n = 20;
-                            redYPos = redYPos + n;
-                            redImage.setY(redYPos);
-                            redImage.setVisibility(View.VISIBLE);
-                            score = score + 70;
-                            updateScore();
-                            break;
-                        }
-                }
-                return true;
-            }
-        });
-
-        final ImageView purpleImage = (ImageView) findViewById(R.id.purple);
-        purpleImage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventAction = event.getAction();
-
-                switch (eventAction) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        if(running && !purpleDead) {
-                            playSound();
-                            purpleImage.setVisibility(View.INVISIBLE);
-                            purpleYPos = 0;
-                            Random rand = new Random();
-                            int n = 20;
-                            purpleYPos = purpleYPos + n;
-                            purpleImage.setY(purpleYPos);
-                            purpleImage.setVisibility(View.VISIBLE);
-                            score = score + 80;
+                            cow.setYPos(cow.getYPos() + n);
+                            image.setY(cow.getYPos());
+                            image.setVisibility(View.VISIBLE);
+                            score = score + cow.getScore();
                             updateScore();
                             break;
                         }
@@ -282,51 +139,26 @@ public class MainActivity extends Activity
         });
     }
 
-    private int getScore()
-    {
+    private int getScore() {
         return score;
     }
 
-    private void updateScore()
-    {
+    private void updateScore() {
         TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
         scoreDisplay.setText(Integer.toString(getScore()));
 
     }
 
-    private void initialize(){
-
-        blueYPos = 0;
-        blackYPos = 0;
-        yellowYPos = 0;
-        greenYPos = 0;
-        redYPos = 0;
-        purpleYPos = 0;
-
-        blueXPos = 0;
-        blackXPos = 0;
-        yellowXPos = 0;
-        greenXPos = 0;
-        redXPos = 0;
-        purpleXPos = 0;
-
-        blueInitialX = 0;
-        blackInitialX = 0;
-        greenInitialX = 0;
-        yellowInitialX = 0;
-        redInitialX = 0;
-        purpleInitialX = 0;
-
-        blueDead = false;
-        blackDead = false;
-        greenDead = false;
-        yellowDead = false;
-        redDead = false;
-        purpleDead = false;
+    private void initialize() {
+        cows = Arrays.asList(new Cow(R.id.blue, R.drawable.my_cow_dead_green, 30),
+                new Cow(R.id.black, R.drawable.my_cow2_dead_green, 40),
+                new Cow(R.id.yellow, R.drawable.my_cow3_dead_green, 50),
+                new Cow(R.id.green, R.drawable.my_cow4_dead_green, 60),
+                new Cow(R.id.red, R.drawable.my_cow5_dead_green, 70),
+                new Cow(R.id.purple, R.drawable.my_cow6_dead_green, 80));
     }
 
-    private void startGame()
-    {
+    private void startGame() {
         TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
         scoreDisplay.setText("0");
         running = true;
@@ -336,10 +168,16 @@ public class MainActivity extends Activity
         new CountDownTimer(25000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                ((TextView)findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 1000));
+                ((TextView) findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 1000));
 
-                if (blueDead && blackDead && greenDead && yellowDead && redDead && purpleDead)
-                {
+                boolean allDead = true;
+                for (Cow cow : cows) {
+                    if (!cow.isDead()) {
+                        allDead = false;
+                        break;
+                    }
+                }
+                if (allDead) {
                     onFinish();
                     cancel();
                     return;
@@ -348,9 +186,8 @@ public class MainActivity extends Activity
                 moveImages();
             }
 
-            public void onFinish()
-            {
-                ((TextView)findViewById(R.id.timerId)).setText("0");
+            public void onFinish() {
+                ((TextView) findViewById(R.id.timerId)).setText("0");
 
                 running = false;
 
@@ -368,225 +205,48 @@ public class MainActivity extends Activity
         }.start();
     }
 
-    private void moveImages()
-    {
-        if(level == 2)
-        {
+    private void moveImages() {
+        if (level == 2) {
             speed = 70;
-        }
-        else if(level == 3)
-        {
+        } else if (level == 3) {
             speed = 90;
         }
 
-        ImageView blueImage = (ImageView) findViewById(R.id.blue);
+        for (Cow cow : cows) {
+            moveCow(cow);
+        }
+    }
 
-        if(blueImage.getY() >= maxY && !blueDead)
-        {
-            System.out.println(blueImage.getY());
-            blueDead = true;
+    /**
+     * Update the state of the given cow.
+     *
+     * @param cow The cow to update.
+     */
+    private void moveCow(Cow cow) {
+        ImageView image = (ImageView) findViewById(cow.getImageId());
+        if (image.getY() >= maxY && !cow.isDead()) {
+            System.out.println(image.getY());
+            cow.setDead(true);
             playDieSound();
-            blueImage.setBackgroundResource(R.drawable.my_cow_dead_green);
-            //   blueYPos = 20;
+            image.setBackgroundResource(cow.getDeadImageId());
+            // blueYPos = 20;
             // blueXPos = blueInitialX;
+        } else if (!cow.isDead()) {
+            cow.setYPos(image.getY() + speed);
+            if (maxY < cow.getYPos()) {
+                cow.setYPos(maxY);
+            }
+
+            if (cow.getInitialX() == 0) {
+                cow.setInitialX(image.getX());
+            }
+            if (image.getX() > cow.getInitialX()) {
+                cow.setXPos(image.getX() - 20);
+            } else {
+                cow.setXPos(image.getX() + 20);
+            }
+            image.setY(cow.getYPos());
+            image.setX(cow.getXPos());
         }
-        else if (!blueDead)
-        {
-            blueYPos = blueImage.getY() + speed;
-            if(maxY < blueYPos)
-            {
-                blueYPos = maxY;
-            }
-
-            if(blueInitialX == 0)
-            {
-                blueInitialX = blueImage.getX();
-            }
-            if(blueImage.getX() > blueInitialX) {
-                blueXPos = blueImage.getX() - 20;
-            }
-            else
-            {
-                blueXPos = blueImage.getX() + 20;
-            }
-            blueImage.setY(blueYPos);
-            blueImage.setX(blueXPos);
-        }
-
-        ImageView blackImage = (ImageView) findViewById(R.id.black);
-
-        if(blackImage.getY() >= maxY && !blackDead)
-        {
-            System.out.println(blackImage.getY());
-            blackDead = true;
-            playDieSound();
-            blackImage.setBackgroundResource(R.drawable.my_cow2_dead_green);
-            //  blackYPos = 20;
-            //blackXPos = blackInitialX;
-        }
-        else if(!blackDead)
-        {
-            blackYPos = blackImage.getY() + speed;
-            if(maxY < blackYPos)
-            {
-                blackYPos = maxY;
-            }
-
-            if(blackInitialX == 0)
-            {
-                blackInitialX = blackImage.getX();
-            }
-            if(blackImage.getX() > blackInitialX) {
-                blackXPos = blackImage.getX() - 20;
-            }
-            else
-            {
-                blackXPos = blackImage.getX() + 20;
-            }
-            blackImage.setY(blackYPos);
-            blackImage.setX(blackXPos);
-        }
-
-        ImageView yellowImage = (ImageView) findViewById(R.id.yellow);
-
-        if(yellowImage.getY() >= maxY && !yellowDead)
-        {
-            System.out.println(yellowImage.getY());
-            yellowDead = true;
-            playDieSound();
-            yellowImage.setBackgroundResource(R.drawable.my_cow3_dead_green);
-            //  yellowYPos = 20;
-            //yellowXPos = yellowInitialX;
-        }
-        else if(!yellowDead)
-        {
-            yellowYPos = yellowImage.getY() + speed;
-
-            if(maxY < yellowYPos)
-            {
-                yellowYPos = maxY;
-            }
-
-            if(yellowInitialX == 0)
-            {
-                yellowInitialX = yellowImage.getX();
-            }
-            if(yellowImage.getX() > yellowInitialX) {
-                yellowXPos = yellowImage.getX() - 20;
-            }
-            else
-            {
-                yellowXPos = yellowImage.getX() + 20;
-            }
-            yellowImage.setY(yellowYPos);
-            yellowImage.setX(yellowXPos);
-        }
-
-        ImageView greenImage = (ImageView) findViewById(R.id.green);
-
-        if(greenImage.getY() >= maxY && !greenDead)
-        {
-            System.out.println(greenImage.getY());
-            greenDead = true;
-            playDieSound();
-            greenImage.setBackgroundResource(R.drawable.my_cow4_dead_green);
-            // greenYPos = 20;
-            //greenXPos = greenInitialX;
-        }
-        else if(!greenDead)
-        {
-            greenYPos = greenImage.getY() + speed;
-
-            if(maxY < greenYPos)
-            {
-                greenYPos = maxY;
-            }
-
-            if(greenInitialX == 0)
-            {
-                greenInitialX = greenImage.getX();
-            }
-            if(greenImage.getX() > greenInitialX) {
-                greenXPos = greenImage.getX() - 20;
-            }
-            else
-            {
-                greenXPos = greenImage.getX() + 20;
-            }
-            greenImage.setY(greenYPos);
-            greenImage.setX(greenXPos);
-        }
-
-
-        ImageView redImage = (ImageView) findViewById(R.id.red);
-
-        if(redImage.getY() >= maxY && !redDead)
-        {
-            System.out.println(redImage.getY());
-            redDead = true;
-            playDieSound();
-            redImage.setBackgroundResource(R.drawable.my_cow5_dead_green);
-            // redYPos = 20;
-            //redXPos = redInitialX;
-        }
-        else if(!redDead)
-        {
-            redYPos = redImage.getY() + speed;
-
-            if(maxY < redYPos)
-            {
-                redYPos = maxY;
-            }
-
-            if(redInitialX == 0)
-            {
-                redInitialX = redImage.getX();
-            }
-            if(redImage.getX() > redInitialX) {
-                redXPos = redImage.getX() - 20;
-            }
-            else
-            {
-                redXPos = redImage.getX() + 20;
-            }
-            redImage.setY(redYPos);
-            redImage.setX(redXPos);
-        }
-
-
-        ImageView purpleImage = (ImageView) findViewById(R.id.purple);
-        if(purpleImage.getY() >= maxY && !purpleDead)
-        {
-            System.out.println(purpleImage.getY());
-            purpleDead = true;
-            playDieSound();
-            purpleImage.setBackgroundResource(R.drawable.my_cow6_dead_green);
-            // purpleYPos = 20;
-            // purpleXPos = purpleInitialX;
-        }
-        else if(!purpleDead)
-        {
-            purpleYPos = purpleImage.getY() + speed;
-
-            if(maxY < purpleYPos)
-            {
-                purpleYPos = maxY;
-            }
-
-            if(purpleInitialX == 0)
-            {
-                purpleInitialX = purpleImage.getX();
-            }
-            if(purpleImage.getX() > purpleInitialX) {
-                purpleXPos = purpleImage.getX() - 20;
-            }
-            else
-            {
-                purpleXPos = purpleImage.getX() + 20;
-            }
-            purpleImage.setY(purpleYPos);
-            purpleImage.setX(purpleXPos);
-        }
-
     }
 }
