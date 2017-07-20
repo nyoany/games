@@ -8,6 +8,7 @@ public class Cow {
     private float yPos = 0;
     private float initialX = 0;
     private boolean dead = false;
+    private int speed = 0;
     private int imageId;
     private int deadImageId;
     private int score;
@@ -73,4 +74,8 @@ public class Cow {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public int getSpeed() { return speed; }
+
+    public void setSpeed(int speed) { this.speed = speed; }
 }

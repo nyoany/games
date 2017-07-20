@@ -22,6 +22,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
     int score = 0;
     static boolean running = false;
+    private Random rand = new Random();
 
     /**
      * A list of the cows in the game.
@@ -35,13 +36,23 @@ public class MainActivity extends Activity {
 
     final int maxY = 600;
 
-    static int level = 1;
-
-    int speed = 50;
+    private static int level = 1;
+    /** The minimum vertical speed of the cows (determined by the level). */
+    private static int baseSpeed = 5;
 
     MediaPlayer mp;
     // MediaPlayer startSound;
     MediaPlayer dieSound;
+
+    /**
+     * Set the level and the base speed.
+     *
+     * @param level The level number (between 1 and 3).
+     */
+    public static void setLevel(int level) {
+        MainActivity.level = level;
+        baseSpeed = 3 + 2 * level;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +135,6 @@ public class MainActivity extends Activity {
                             playSound();
                             image.setVisibility(View.INVISIBLE);
                             cow.setYPos(0);
-                            Random rand = new Random();
                             int n = 20;
                             cow.setYPos(cow.getYPos() + n);
                             image.setY(cow.getYPos());
@@ -165,10 +175,10 @@ public class MainActivity extends Activity {
         score = 0;
         initialize();
 
-        new CountDownTimer(25000, 1000) {
+        new CountDownTimer(25000, 100) {
 
             public void onTick(long millisUntilFinished) {
-                ((TextView) findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 1000));
+                ((TextView) findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 100));
 
                 boolean allDead = true;
                 for (Cow cow : cows) {
@@ -206,12 +216,6 @@ public class MainActivity extends Activity {
     }
 
     private void moveImages() {
-        if (level == 2) {
-            speed = 70;
-        } else if (level == 3) {
-            speed = 90;
-        }
-
         for (Cow cow : cows) {
             moveCow(cow);
         }
@@ -232,7 +236,8 @@ public class MainActivity extends Activity {
             // blueYPos = 20;
             // blueXPos = blueInitialX;
         } else if (!cow.isDead()) {
-            cow.setYPos(image.getY() + speed);
+            cow.setSpeed(Math.min(Math.max(cow.getSpeed() + rand.nextInt(10) - 5, 0), baseSpeed));
+            cow.setYPos(image.getY() + cow.getSpeed() + baseSpeed);
             if (maxY < cow.getYPos()) {
                 cow.setYPos(maxY);
             }
@@ -241,9 +246,9 @@ public class MainActivity extends Activity {
                 cow.setInitialX(image.getX());
             }
             if (image.getX() > cow.getInitialX()) {
-                cow.setXPos(image.getX() - 20);
+                cow.setXPos(image.getX() - rand.nextInt(20));
             } else {
-                cow.setXPos(image.getX() + 20);
+                cow.setXPos(image.getX() + rand.nextInt(20));
             }
             image.setY(cow.getYPos());
             image.setX(cow.getXPos());

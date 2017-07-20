@@ -49,7 +49,7 @@ public class MovingSquareStartActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Intent gameStart = new Intent(MovingSquareStartActivity.this, MainActivity.class);
-                MainActivity.level = level;
+                MainActivity.setLevel(level);
                 startActivity(gameStart);
             }
         });
