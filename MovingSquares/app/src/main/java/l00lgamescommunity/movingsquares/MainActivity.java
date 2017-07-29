@@ -27,12 +27,12 @@ public class MainActivity extends Activity {
     /**
      * A list of the cows in the game.
      */
-    private List<Cow> cows = Arrays.asList(new Cow(R.id.blue, R.drawable.my_cow_dead_green, 30),
-            new Cow(R.id.black, R.drawable.my_cow2_dead_green, 40),
-            new Cow(R.id.yellow, R.drawable.my_cow3_dead_green, 50),
-            new Cow(R.id.green, R.drawable.my_cow4_dead_green, 60),
-            new Cow(R.id.red, R.drawable.my_cow5_dead_green, 70),
-            new Cow(R.id.purple, R.drawable.my_cow6_dead_green, 80));
+    private List<Cow> cows = Arrays.asList(new Cow(R.id.blue, R.drawable.my_cow_dead_purple, 30),
+            new Cow(R.id.black, R.drawable.my_cow2_dead_purple, 40),
+            new Cow(R.id.yellow, R.drawable.my_cow3_dead_purple, 50),
+            new Cow(R.id.green, R.drawable.my_cow4_dead_purple, 60),
+            new Cow(R.id.red, R.drawable.my_cow5_dead_purple, 70),
+            new Cow(R.id.purple, R.drawable.my_cow6_dead_purple, 80));
 
     final int maxY = 600;
 
@@ -160,12 +160,12 @@ public class MainActivity extends Activity {
     }
 
     private void initialize() {
-        cows = Arrays.asList(new Cow(R.id.blue, R.drawable.my_cow_dead_green, 30),
-                new Cow(R.id.black, R.drawable.my_cow2_dead_green, 40),
-                new Cow(R.id.yellow, R.drawable.my_cow3_dead_green, 50),
-                new Cow(R.id.green, R.drawable.my_cow4_dead_green, 60),
-                new Cow(R.id.red, R.drawable.my_cow5_dead_green, 70),
-                new Cow(R.id.purple, R.drawable.my_cow6_dead_green, 80));
+        cows = Arrays.asList(new Cow(R.id.blue, R.drawable.my_cow_dead_purple, 30),
+                new Cow(R.id.black, R.drawable.my_cow2_dead_purple, 40),
+                new Cow(R.id.yellow, R.drawable.my_cow3_dead_purple, 50),
+                new Cow(R.id.green, R.drawable.my_cow4_dead_purple, 60),
+                new Cow(R.id.red, R.drawable.my_cow5_dead_purple, 70),
+                new Cow(R.id.purple, R.drawable.my_cow6_dead_purple, 80));
     }
 
     private void startGame() {
@@ -215,16 +215,8 @@ public class MainActivity extends Activity {
                 Context context = getApplicationContext();
                 int finalScore = score;
 
-                // double the score if there is only one saved cow
-                if(numberOfSavedCows == 1)
-                {
-                    finalScore = 2 * finalScore;
-                }
                 // set final score to be the actual score when no cow has been saved and number of saved cows + 1 multiplied by score if more
-                else
-                {
-                    finalScore = finalScore * (numberOfSavedCows + 1);
-                }
+                finalScore = finalScore * (numberOfSavedCows + 1);
 
                 ((TextView) findViewById(R.id.scoreId)).setText(String.valueOf(finalScore));
                 CharSequence text = "You scored : " + finalScore + ".";
