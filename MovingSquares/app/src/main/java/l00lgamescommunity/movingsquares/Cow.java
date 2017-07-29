@@ -7,7 +7,7 @@ public class Cow {
     private float xPos = 0;
     private float yPos = 0;
     private float initialX = 0;
-    private boolean dead = false;
+    private boolean dead;
     private int speed = 0;
     private int imageId;
     private int deadImageId;

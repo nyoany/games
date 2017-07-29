@@ -179,7 +179,6 @@ public class MainActivity extends Activity {
 
             public void onTick(long millisUntilFinished) {
                 ((TextView) findViewById(R.id.timerId)).setText(String.format("%d", millisUntilFinished / 100));
-
                 boolean allDead = true;
                 for (Cow cow : cows) {
                     if (!cow.isDead()) {
@@ -192,7 +191,6 @@ public class MainActivity extends Activity {
                     cancel();
                     return;
                 }
-
                 moveImages();
             }
 
@@ -206,7 +204,7 @@ public class MainActivity extends Activity {
                 backButton.setClickable(true);
 
                 Context context = getApplicationContext();
-                CharSequence text = "Well done! \n You scored : " + score + ".";
+                CharSequence text = "You scored : " + score + ".";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -233,8 +231,7 @@ public class MainActivity extends Activity {
             cow.setDead(true);
             playDieSound();
             image.setBackgroundResource(cow.getDeadImageId());
-            // blueYPos = 20;
-            // blueXPos = blueInitialX;
+            image.setEnabled(false);
         } else if (!cow.isDead()) {
             cow.setSpeed(Math.min(Math.max(cow.getSpeed() + rand.nextInt(10) - 5, 0), baseSpeed));
             cow.setYPos(image.getY() + cow.getSpeed() + baseSpeed);
