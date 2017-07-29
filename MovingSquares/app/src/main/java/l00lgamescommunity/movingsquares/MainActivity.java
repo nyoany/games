@@ -171,6 +171,7 @@ public class MainActivity extends Activity {
     private void startGame() {
         TextView scoreDisplay = (TextView) findViewById(R.id.scoreId);
         scoreDisplay.setText("0");
+        ((TextView) findViewById(R.id.savedCows)).setText("0");
         running = true;
         score = 0;
         initialize();
@@ -196,15 +197,37 @@ public class MainActivity extends Activity {
 
             public void onFinish() {
                 ((TextView) findViewById(R.id.timerId)).setText("0");
-
+                int numberOfSavedCows = 0;
+                for(Cow cow : cows)
+                {
+                    if(!cow.isDead())
+                    {
+                        numberOfSavedCows = numberOfSavedCows + 1;
+                    }
+                }
                 running = false;
 
+                ((TextView) findViewById(R.id.savedCows)).setText(String.valueOf(numberOfSavedCows));
                 Button backButton = (Button) findViewById(R.id.backButton);
                 backButton.setEnabled(true);
                 backButton.setClickable(true);
 
                 Context context = getApplicationContext();
-                CharSequence text = "You scored : " + score + ".";
+                int finalScore = score;
+
+                // double the score if there is only one saved cow
+                if(numberOfSavedCows == 1)
+                {
+                    finalScore = 2 * finalScore;
+                }
+                // set final score to be the actual score when no cow has been saved and number of saved cows + 1 multiplied by score if more
+                else
+                {
+                    finalScore = finalScore * (numberOfSavedCows + 1);
+                }
+
+                ((TextView) findViewById(R.id.scoreId)).setText(String.valueOf(finalScore));
+                CharSequence text = "You scored : " + finalScore + ".";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);

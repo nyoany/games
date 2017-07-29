@@ -13,10 +13,12 @@
     <string name="start">Start</string>
     <string name="back">Back</string>
     <string name="aboutShort">About the game</string>
-    <string name="about">Save as many cows as you can.\n\nEach time you keep a cow away from the fence you are getting points.\n\nGood luck! </string>
+    <string name="about">Save as many cows as you can.\n\nEach time you keep a cow away from the fence you are getting points.\n\nNote that the number of cows that are still alive at the end
+        of the game will give you extra points.\n\nGood luck! </string>
 
     <string name="title_activity_how_to_play">How To Play</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="savedCows">Saved cows : </string>
 
 </resources>

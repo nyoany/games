@@ -104,7 +104,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="330dp"
         android:textStyle="bold"
         android:textSize="22sp"
         android:text="@string/score"/>
@@ -112,7 +112,7 @@
         android:id="@+id/scoreId"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="330dp"
         android:layout_marginStart="75dp"
         android:layout_marginLeft="75dp"
         android:textStyle="bold"
@@ -121,7 +121,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="360dp"
         android:textStyle="bold"
         android:textSize="22sp"
         android:text="@string/time"/>
@@ -129,11 +129,29 @@
         android:id="@+id/timerId"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="360dp"
         android:layout_marginStart="195dp"
         android:layout_marginLeft="195dp"
         android:textStyle="bold"
         android:textSize="22sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="390dp"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:text="@string/savedCows"/>
+    <TextView
+        android:id="@+id/savedCows"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="390dp"
+        android:layout_marginStart="195dp"
+        android:layout_marginLeft="195dp"
+        android:textStyle="bold"
+        android:textSize="22sp" />
+
     <LinearLayout
         android:layout_width="140dp"
         android:layout_height="45dp"
